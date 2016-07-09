@@ -1,0 +1,27 @@
+#include "httphelper.h"
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QEventLoop>
+#include <QEvent>
+#include <QObject>
+
+HttpHelper::HttpHelper()
+{
+
+}
+
+void HttpHelper::GetHtml()
+{
+    QNetworkAccessManager manager;
+
+    QNetworkRequest request(QUrl("http://qt-project.org"));
+    request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+
+    QNetworkReply *response = manager.get(request);
+
+    QEventLoop event;
+    connect(response,SIGNAL(finished()),&event,SLOT(quit()));
+    event.exec();
+
+    QString html = response->readAll(); // Source should be stored here
+}

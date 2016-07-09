@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    controller = new Controller(ui->textEdit);
+    controller = new Controller(ui->plainTextEdit);
 }
 
 MainWindow::~MainWindow()
@@ -17,7 +17,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-
    controller->operate("asdas");
-   ui->pushButton->setText("Ахиха ле васал");
-}
+ }

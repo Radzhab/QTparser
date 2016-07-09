@@ -14,7 +14,7 @@ QString HttpHelper::GetHtml()
 {
     QNetworkAccessManager manager;
 
-    QNetworkRequest request(QUrl("http://qt-project.org"));
+    QNetworkRequest request(QUrl("http://rabota05.ru"));
     request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     QNetworkReply *response = manager.get(request);

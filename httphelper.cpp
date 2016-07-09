@@ -10,7 +10,7 @@ HttpHelper::HttpHelper()
 
 }
 
-void HttpHelper::GetHtml()
+QString HttpHelper::GetHtml()
 {
     QNetworkAccessManager manager;
 
@@ -24,4 +24,5 @@ void HttpHelper::GetHtml()
     event.exec();
 
     QString html = response->readAll(); // Source should be stored here
+    return html;
 }

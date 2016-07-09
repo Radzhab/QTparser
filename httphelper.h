@@ -7,7 +7,7 @@ class HttpHelper:public QObject{
 Q_OBJECT
 public:
     explicit HttpHelper();
-    void GetHtml();
+    QString GetHtml();
 };
 
 #endif // HTTPHELPER_H

@@ -1,16 +1,18 @@
 #ifndef THREAD_H
 #define THREAD_H
 #include <QThread>
-
+#include <QTextEdit>
+#include <httphelper.h>
 class Worker : public QObject
 {
     Q_OBJECT
     QThread workerThread;
+    HttpHelper *helper;
 
 public slots:
     void doWork(const QString &result) {
-        QString axu = "2";
-        emit resultReady(axu);
+
+        emit resultReady(helper->GetHtml());
     }
 
 signals:
@@ -21,8 +23,11 @@ class Controller : public QObject
 {
     Q_OBJECT
     QThread workerThread;
+    QTextEdit *textDesk;
+
+
 public:
-    Controller() {
+    Controller(QTextEdit *txt): textDesk(txt) {
         Worker *worker = new Worker;
         worker->moveToThread(&workerThread);
         connect(&workerThread, SIGNAL(finished()), worker, SLOT(deleteLater()));
@@ -35,7 +40,10 @@ public:
         workerThread.wait();
     }
 public slots:
-    void handleResults(const QString &str);
+    void handleResults(const QString &str)
+    {
+        textDesk->append(str);
+    }
 signals:
     void operate(const QString &);
 };
